@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %}Edit Profile{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+   {% if user.id == profile.user.id %}
+
+   <h1>プロフィール編集</h1>
+   <br/>
+   <br/>
+
+   <div class="form-group">
+      <form method="POST" enctype="multipart/form-data">
+       {% csrf_token %}
+       {{ form.media }}
+       {{ form.as_p }}
+      <button class="btn btn-secondary">プロフィール更新</button>
+   </div>
+   
+   <script>
+      var name = "{{ user.id }}";
+      document.getElementById("elder").value = name;
+   </script>
+   
+   {% else %}
+   
+      You're not the correct  user to edit this page.
+   
+   {% endif %}
+   
+   
+{% else %}
+
+You're not allowed here.
+
+{% endif %}
+
+{% endblock %}

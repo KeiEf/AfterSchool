@@ -1,0 +1,48 @@
+
+{% extends 'base.html' %}
+{% block title %}Edit post{% endblock %}
+{% block content %}
+
+
+{% if user.is_authenticated %}
+
+
+    <h1>投稿内容編集</h1>
+    <br/>
+    <br/>
+    <div class="form-group">
+      <form method="POST" enctype="multipart/form-data">
+       {% csrf_token %}
+      <!-- {{ form.as_table }} -->
+       {{ form.media }}
+       {{ form.as_p }}
+  
+       {% if int.user.id == int.form.author.value %}
+         <button type="submit"class="btn btn-secondary" name="next" value="confirm" >プレビュー</button>
+         <button class="btn btn-primary" type="submit" name="next" value="create">更新</button>
+         <!--<button class="btn btn-secondary">更新</button>-->
+       {% else %}
+   
+          You're not allowed to edit this post.
+
+       {% endif %}
+
+       </form>
+
+    </div>
+
+
+
+{% else %}
+
+   You must login.
+
+{% endif %}
+
+   <script>
+      var name = "{{ user.id }}";
+      document.getElementById("elder").value = name;
+   </script>
+
+<hr>
+{% endblock %}

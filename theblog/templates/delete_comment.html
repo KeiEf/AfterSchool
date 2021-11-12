@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}コメント削除{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+    {% if user.id == comment.name.id %}
+
+   <h1>コメント削除</h1>
+   <br/><br/>
+   <h3>コメント：</h3>
+    {{ comment.body }}
+   <br/>
+   <div class="form-group">
+      <form method="POST">
+       {% csrf_token %}
+      <br>
+      <strong>削除してもよろしいですか？</strong><br/><br/>
+      <button class="btn btn-secondary">削除</button>
+      <a href="{% url 'home' %}" class="btn btn-secondary">キャンセル</a>
+   </div>
+   {% else %}
+
+      You're not allowed here.
+
+   {% endif %}
+   
+   
+{% else %}
+
+You're not allowed here.
+
+{% endif %}
+
+
+{% endblock %}

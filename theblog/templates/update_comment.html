@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}コメント編集{% endblock %}
+{% block content %}
+
+{% if user.is_authenticated %}
+
+    <h1>コメント編集</h1>
+    <br/>
+    <br/>
+    <div class="form-group" >
+       <form method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          {{ form.media }}
+          {{ form.as_p }}
+          {% if int.user.id == int.form.name.value %}
+             <button type="submit"class="btn btn-secondary" name="next" value="confirm">プレビュー</button>
+             <button class="btn btn-primary" type="submit" name="next" value="create">更新</button>
+          {% else %}
+   
+          You're not allowed here.
+
+         {% endif %}
+      </form>
+    </div>
+
+
+{% else %}
+
+   You're not allowed here.
+
+{% endif %}
+<hr>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Preview{% endblock %}
+{% block content %}
+
+<h4>内容を確認してください</h4>
+   <br>
+   <div class="card">
+      <div class="card-body">
+         <h5 class="card-title">タイトル：{{form.title.value}}</h5>
+         <hr>
+            <p class="card-text">{{form.body.value |safe}}</p>
+      </div>
+         <ul class="list-group list-group-flush">
+            <li class="list-group-item">タグ：{{form.tags.value}}</li>
+         </ul>
+
+         <div class="card-body">
+
+             <form class="ui form" method="POST">
+                 {% csrf_token %}
+                 {% for field in form %}
+                 {{field.as_hidden}}
+                 {% endfor %}
+                 <button class="btn btn-secondary" type="submit" name="next" value="back">戻る</button>
+                 <button class="btn btn-primary" type="submit" name="next" value="create">更新</button>
+             </form>
+         </div>
+
+   </div>
+
+   <script>
+      var name = "{{ user.id }}";
+      document.getElementById("elder").value = name;
+   </script>
+
+
+<hr>
+
+
+
+{% endblock %}
